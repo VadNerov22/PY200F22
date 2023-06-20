@@ -12,14 +12,14 @@ class Node:
         """
         self.value = value
 
-        self.next = None
+        self.next_ = None
         self.set_next(next_)
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
+        return f"Node({self.value}, {None})" if self.next_ is None else f"Node({self.value}, Node({self.next_}))"
 
     def __str__(self) -> str:
-        ...  # TODO метод должен возвращать значение текущего узла
+        return str(self.value)
 
     def is_valid(self, node: Any) -> None:
         if not isinstance(node, (type(None), Node)):
@@ -27,7 +27,7 @@ class Node:
 
     def set_next(self, next_: Optional["Node"] = None) -> None:
         self.is_valid(next_)
-        self.next = next_
+        self.next_ = next_
 
 
 def linked_nodes(left_node: Node, right_node: Optional["Node"] = None) -> None:
@@ -44,6 +44,9 @@ if __name__ == "__main__":
     list_nodes = [Node(value) for value in range(5)]
     print(list_nodes)
 
-    # TODO реализуйте алгоритм, который свяжет между собой узлы в списке
+    for i in range(len(list_nodes) - 1):
+        current_node = list_nodes[i]  # берём текущий узел
+        next_node = list_nodes[i + 1]  # берём следующий узел
+        linked_nodes(current_node, next_node)  # связываем их
 
     print(list_nodes)

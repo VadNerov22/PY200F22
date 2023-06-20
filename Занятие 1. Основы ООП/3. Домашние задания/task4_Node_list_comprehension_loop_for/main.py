@@ -11,14 +11,15 @@ class Node:
         :param next_: следующий узел, если он есть
         """
         self.value = value
-        self.next = next_
+        self.next_ = next_
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {self.next})"
+        return f"Node({self.value}, {self.next_})"
 
 
 if __name__ == "__main__":
-    list_nodes = ...  # TODO с помощью list comprehension сделать список узлов со значениями от 0 до 9
+    list_nodes = [Node(val) for val in range(10)]
     print(list_nodes)
 
-    # TODO распечатать значения узлов
+    for i, el in enumerate(list_nodes):
+        print(list_nodes[i].value)
