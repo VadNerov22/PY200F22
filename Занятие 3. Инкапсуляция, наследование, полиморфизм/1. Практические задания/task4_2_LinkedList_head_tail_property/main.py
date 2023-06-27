@@ -3,39 +3,47 @@ from typing import Any, Iterable, Optional
 from node import Node
 
 
-# TODO защитить от модификации атрибуты head, tail, len
+
 class LinkedList:
     def __init__(self, data: Iterable = None):
         """Конструктор связного списка"""
-        self.len = 0
-        self.head: Optional[Node] = None
-        self.tail = self.head
+        self._len = 0
+        self._head: Optional[Node] = None
+        self._tail = self.head
 
         if data is not None:
             for value in data:
                 self.append(value)
 
+    @property
+    def head(self):
+        return self._head
+
+    @property
+    def tail(self):
+        return self._tail
+
     def append(self, value: Any):
         """ Добавление элемента в конец связного списка. """
         append_node = Node(value)
 
-        if self.head is None:
-            self.head = self.tail = append_node
+        if self._head is None:
+            self._head = self._tail = append_node
         else:
             self.linked_nodes(self.tail, append_node)
-            self.tail = append_node
+            self._tail = append_node
 
-        self.len += 1
+        self._len += 1
 
     def step_by_step_on_nodes(self, index: int) -> Node:
         """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
         if not isinstance(index, int):
             raise TypeError()
 
-        if not 0 <= index < self.len:  # для for
+        if not 0 <= index < self._len:  # для for
             raise IndexError()
 
-        current_node = self.head
+        current_node = self._head
         for _ in range(index):
             current_node = current_node.next
 
@@ -75,6 +83,6 @@ if __name__ == "__main__":
     list_ = [1, 2, 3, 4, 5]
 
     ll = LinkedList(list_)
-    print(ll.head)
-    print(ll.tail)
-    print(len(ll))
+    print(ll._head)
+    print(ll._tail)
+    print(ll._len)

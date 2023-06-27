@@ -12,11 +12,11 @@ class Node:
         """
         self.value = value
 
-        self.__next = None
+        self.next = None
         self.set_next(next_)
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {None})" if self.__next is None else f"Node({self.value}, Node({self.__next}))"
+        return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
 
     def __str__(self) -> str:
         return str(self.value)
@@ -27,13 +27,4 @@ class Node:
 
     def set_next(self, next_: Optional["Node"] = None) -> None:
         self.is_valid(next_)
-        self.__next = next_
-
-
-if __name__ == "__main__":
-    first_node = Node("first_node")
-    second_node = Node("second_node")
-
-    first_node.set_next(second_node)
-
-    print(repr(first_node), repr(second_node))
+        self.next = next_

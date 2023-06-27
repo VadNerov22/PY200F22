@@ -3,20 +3,20 @@ import unittest
 from task import Node
 
 
-class TestCase(...):  # TODO наследоваться от unittest.TestCase
+class TestCase(unittest.TestCase):
     def test_init_node_without_next(self):
         """Проверить следующий узел после инициализации с аргументом next_ по умолчанию"""
-        ...  # TODO с помощью метода assertIsNone проверить следующий узел
+        self.assertIsNone(next)
 
     def test_init_node_with_next(self):
         """Проверить следующий узел после инициализации с переданным аргументом next_"""
-        ...  # TODO проверить что узлы связались
+        self.assertIsNotNone(next)
 
     def test_repr_node_without_next(self):
         """Проверить метод __repr__, для случая когда нет следующего узла."""
-        ...  # TODO проверить метод __repr__ без следующего узла
+        self.assertEqual(f"Node({self.value}, {None})", self.__repr__())
 
-    ...  # TODO пропустить тест с помощью декоратора unittest.skip
+    @unittest.skip
     def test_repr_node_with_next(self):
         """Проверить метод __repr__, для случая когда установлен следующий узел."""
         ...
