@@ -94,5 +94,3 @@ if __name__ == "__main__":
 
     ll = [4, 5, 6] + ll
     print(ll)
-
-
