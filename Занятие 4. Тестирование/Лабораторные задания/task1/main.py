@@ -16,8 +16,8 @@ class Cars:
         """
         self._car_brand = car_brand
         self.engine_power = self.is_valid_init(engine_power)
-        self._car_capacity_volume_f = car_capacity_volume_f
-        self._car_occupied_volume_f = car_occupied_volume_f
+        self.car_capacity_volume_f = car_capacity_volume_f
+        self.car_occupied_volume_f = car_occupied_volume_f
         self.speed = self.is_valid_init(speed)
 
     @property
@@ -35,8 +35,8 @@ class Cars:
             if not isinstance(value, int):
                 raise TypeError("Объем топливного бака (емксоть заряда аккумуляторов) должен быть типа <int>.")
             if value <= 0:
-                raise ValueError("Объем топливного бака (емксоть заряда аккумуляторов) \
-                                должен быть положительном числом больше 0.")
+                raise ValueError("Объем топливного бака (емксоть заряда аккумуляторов) "
+                                 "должен быть положительном числом больше 0.")
 
         self._car_capacity_volume_f = value
 
@@ -49,11 +49,11 @@ class Cars:
         """ Устанавливает текущий объем топлива в баке (емксоть заряда аккумуляторов для электроавто). """
         if value is not None:
             if not isinstance(value, int):
-                raise TypeError("Текущий объем топлива в баке (емксоть заряда аккумуляторов) \
-                                должен быть типа <int>.")
-            if not 0 >= value <= self._car_capacity_volume_f:
-                raise ValueError("Текущий объем топлива в баке (емксоть заряда аккумуляторов) должен быть \
-                            положительном числом больше 0 и <= объму топливного бака (емкости заряда аккумуляторов).")
+                raise TypeError("Текущий объем топлива в баке (емксоть заряда аккумуляторов) должен быть типа <int>.")
+            if not 0 <= value <= self._car_capacity_volume_f:
+                raise ValueError("Текущий объем топлива в баке (емксоть заряда аккумуляторов) должен быть "
+                                 "положительном числом больше 0 и <= объму топливного бака "
+                                 "(емкости заряда аккумуляторов).")
 
         self._car_occupied_volume_f = value
 
@@ -72,7 +72,7 @@ class Cars:
         """ Конвертируем скорость из миль/ч в км/ч """
         return int(value * 1.609)
 
-    def power_reserve(self, s) -> int:
+    def power_reserve(self, s: int) -> int:
         """ Определяем запас хода автомобиля
         :param s: Пройденный путь в км
         """
@@ -105,7 +105,7 @@ class FuelCar(Cars):
                 """
         super().__init__(car_brand, engine_power, car_capacity_volume_f, car_occupied_volume_f, speed)
         self.type_ = super().is_valid_car_type(type_)
-        self._engine_capacity = engine_capacity
+        self.engine_capacity = engine_capacity
 
     @property
     def engine_capacity(self) -> float:
@@ -122,7 +122,7 @@ class FuelCar(Cars):
 
         self._engine_capacity = value
 
-    def power_reserve(self, s) -> int:
+    def power_reserve(self, s: int) -> int:
         """ Определяем запас хода автомобиля, работающего на бензине (дизельном топливе)
          :param s: Пройденный путь в км
         """
@@ -143,7 +143,7 @@ class ElectroCar(Cars):
         super().__init__(car_brand, engine_power, car_capacity_volume_f, car_occupied_volume_f, speed)
         self.type_ = super().is_valid_car_type(type_)
 
-    def power_reserve(self, s) -> int:
+    def power_reserve(self, s: int) -> int:
         """ Определяем запас хода автомобиля, работающего на бензине (дизельном топливе)
          :param s: Пройденный путь в км
         """
@@ -154,7 +154,8 @@ class ElectroCar(Cars):
 
 
 if __name__ == "__main__":
-    a = Cars("Mitsubishi", 250, 100, 20, 110)
-    b = ElectroCar("qwer", 150, 66, 30, 95, "кроссовер")
-    c = ElectroCar("qwer2", 150, 60, 30, 120, "кроссовер")
+    a = Cars("Mitsubishi", 250, 58, 20, 110)
+    print(a.power_reserve(380))
+    # b = ElectroCar("qwer", 150, 66, 30, 95, "кроссовер")
+    c = FuelCar("qwer2", 150, 58, 20, 120, "кроссовер", 2.5)
     print(c.power_reserve(380))

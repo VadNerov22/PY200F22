@@ -21,9 +21,12 @@ class MyTestCase(unittest.TestCase):
     def test_to_kbt(self):
         self.assertEqual(Cars.to_kbt(150), 110)
 
-    @unittest.skip("Тест пропущен, т.к. полностью не готов")
+    def setUp(self):
+        self._car_capacity_volume_f = 58
+        self._car_occupied_volume_f = 20
+
     def test_power_reserve(self):
-        self.assertEqual(Cars.power_reserve(380), 362)
+        self.assertEqual(Cars.power_reserve(self, 380), 200)
 
     def test_is_valid_init(self):
         self.assertRaises(TypeError, Cars.is_valid_init, 120.15)
