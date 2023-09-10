@@ -89,7 +89,7 @@ class Query:
         """
         Создаем базовую заявку
         :param query_id: Идентификационный номер заявки.
-        :param project_id: Идентификационный номер заявки.
+        :param project_id: Идентификационный номер проекта.
         :quantity: Количество проектов.
         """
         self.query_id = self._counter.current_id(query_id)
